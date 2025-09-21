@@ -1,14 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './features/auth/components/login.component';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
-  // test the login route and register route
-  {
-    path: 'auth/login',
-    component: LoginComponent,
-  },
-  {
-    path: 'auth/register',
-    component: LoginComponent, // reuse login component to test redirect
-  },
+  { path: '', component: HomeComponent },
+  // on branchera les features ensuite
+  // { path: 'comics', loadChildren: () => import('./features/comics/comics.routes').then(m => m.comicsRoutes) },
+  { path: '**', redirectTo: '' }
 ];
