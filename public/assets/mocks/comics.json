@@ -56,7 +56,14 @@
         "number": 1,
         "title": "Beyond the Pond",
         "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
-      }
+      },
+     {
+        "id": "c3-2",
+        "comicId": "3",
+        "number": 2,
+        "title": "Beyond the Pond 2",
+        "pages": ["/assets/cover test.jpg", "/assets/logo.svg", "/assets/cover test.jpg"]
+     }
     ]
   },
   {
