@@ -36,14 +36,14 @@ import { AuthService } from '../../../features/auth/services/auth.service';
             routerLink="/auth/login"
             class="rounded-4xl px-4 py-2 border border-[--color-text]
                    text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
-                   transition-colors shadow-md shadow-[--color-shadow]/40 rounded-4xl"
+                   transition-colors shadow-md shadow-[--color-shadow]/40"
           >Login</a>
           } @else {
           <button
             (click)="auth.logout()"
             class="rounded-4xl px-4 py-2 border border-[--color-text]
                    text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
-                   transition-colors shadow-md shadow-[--color-shadow]/40 rounded-4xl"
+                   transition-colors shadow-md shadow-[--color-shadow]/40"
           >Logout</button>
           }
         </div>
