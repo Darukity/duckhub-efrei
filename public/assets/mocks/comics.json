@@ -1,0 +1,202 @@
+[
+  {
+    "id": "1",
+    "slug": "duck-adventures-1",
+    "title": "Duck Adventures #1",
+    "description": "The very first adventure of our brave duck hero.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["adventure", "intro"],
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c1-1",
+        "comicId": "1",
+        "number": 1,
+        "title": "The Beginning",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "duck-adventures-2",
+    "title": "Duck Adventures #2",
+    "description": "A new villain appears in the duck world.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["action", "villain"],
+    "createdAt": "2025-01-02T00:00:00Z",
+    "updatedAt": "2025-01-02T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c2-1",
+        "comicId": "2",
+        "number": 1,
+        "title": "Duck vs Villain",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "duck-adventures-3",
+    "title": "Duck Adventures #3",
+    "description": "The ducks travel beyond the pond.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["exploration"],
+    "createdAt": "2025-01-03T00:00:00Z",
+    "updatedAt": "2025-01-03T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c3-1",
+        "comicId": "3",
+        "number": 1,
+        "title": "Beyond the Pond",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "duck-adventures-4",
+    "title": "Duck Adventures #4",
+    "description": "An unexpected ally joins the flock.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["friendship"],
+    "createdAt": "2025-01-04T00:00:00Z",
+    "updatedAt": "2025-01-04T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c4-1",
+        "comicId": "4",
+        "number": 1,
+        "title": "The Ally",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "slug": "duck-adventures-5",
+    "title": "Duck Adventures #5",
+    "description": "The ducks face their greatest challenge yet.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["challenge"],
+    "createdAt": "2025-01-05T00:00:00Z",
+    "updatedAt": "2025-01-05T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c5-1",
+        "comicId": "5",
+        "number": 1,
+        "title": "The Challenge",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "slug": "duck-adventures-6",
+    "title": "Duck Adventures #6",
+    "description": "Secrets of the duck elders revealed.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["mystery"],
+    "createdAt": "2025-01-06T00:00:00Z",
+    "updatedAt": "2025-01-06T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c6-1",
+        "comicId": "6",
+        "number": 1,
+        "title": "Duck Elders",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "slug": "duck-adventures-7",
+    "title": "Duck Adventures #7",
+    "description": "The ducks explore a hidden cave.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["exploration", "cave"],
+    "createdAt": "2025-01-07T00:00:00Z",
+    "updatedAt": "2025-01-07T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c7-1",
+        "comicId": "7",
+        "number": 1,
+        "title": "The Hidden Cave",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "slug": "duck-adventures-8",
+    "title": "Duck Adventures #8",
+    "description": "The flock travels across the big city.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["city", "modern"],
+    "createdAt": "2025-01-08T00:00:00Z",
+    "updatedAt": "2025-01-08T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c8-1",
+        "comicId": "8",
+        "number": 1,
+        "title": "Duck in the City",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "slug": "duck-adventures-9",
+    "title": "Duck Adventures #9",
+    "description": "A festival celebrates the duck heroes.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["festival"],
+    "createdAt": "2025-01-09T00:00:00Z",
+    "updatedAt": "2025-01-09T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c9-1",
+        "comicId": "9",
+        "number": 1,
+        "title": "Duck Festival",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "slug": "duck-adventures-10",
+    "title": "Duck Adventures #10",
+    "description": "The grand finale of season one.",
+    "author": "Darukity",
+    "coverUrl": "/assets/cover test.jpg",
+    "tags": ["finale"],
+    "createdAt": "2025-01-10T00:00:00Z",
+    "updatedAt": "2025-01-10T00:00:00Z",
+    "chapters": [
+      {
+        "id": "c10-1",
+        "comicId": "10",
+        "number": 1,
+        "title": "Finale",
+        "pages": ["/assets/cover test.jpg", "/assets/cover test.jpg", "/assets/cover test.jpg"]
+      }
+    ]
+  }
+]

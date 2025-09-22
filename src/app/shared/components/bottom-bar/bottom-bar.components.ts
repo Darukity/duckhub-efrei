@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <img src="/assets/new_releases_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="w-7 h-7" />
           <span class="text-[--text-medium]">New</span>
         </a>
-
+        @if (auth.isAuthenticated()) {
         <a
           routerLink="/bookmarks"
           routerLinkActive="opacity-100"
@@ -42,8 +43,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <img src="/assets/duck edit2.svg" alt="" class="w-7 h-7" />
           <span class="text-[--text-medium]">Settings</span>
         </a>
+        }
       </div>
     </nav>
   `
 })
-export class BottomBarComponent {}
+export class BottomBarComponent {
+  constructor(public auth: AuthService) {}
+}

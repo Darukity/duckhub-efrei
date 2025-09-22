@@ -1,15 +1,24 @@
 import { Component } from '@angular/core';
+import { ComicListComponent } from "../comics/components/comic-list.component";
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-home',
   template: `
     <section class="mt-8 space-y-4">
-      <h1 class="text-4xl font-extrabold">Welcome to DuckHub</h1>
-      <p class="text-gray-600">Your cozy place for duck comics.</p>
-      <div class="h-2 rounded bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500"></div>
-      <p class="text-sm text-gray-500">If you see the gradient bar above, Tailwind v4 is working ✔</p>
+      @if(auth.isAuthenticated()) {
+      <app-comic-list></app-comic-list>
+      } @else {
+        <div class="text-center space-y-4">
+            <h1 class="text-2xl font-bold">Welcome to Duckhub!</h1>
+            <p>Discover a world of ducks and ducklings</p>
+        </div>
+      }
     </section>
-  `
+  `,
+  imports: [ComicListComponent]
 })
-export class HomeComponent {}
+export class HomeComponent {
+  constructor(public auth: AuthService) {}
+}

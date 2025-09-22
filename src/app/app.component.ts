@@ -9,7 +9,7 @@ import { BottomBarComponent } from './shared/components/bottom-bar/bottom-bar.co
   imports: [RouterOutlet, HeaderComponent, BottomBarComponent],
   template: `
     <app-header />
-    <main class="max-w-6xl mx-auto p-4 space-y-4">
+    <main class="max-w-[85vw] mx-auto p-4 space-y-4">
       <router-outlet />
     </main>
     <app-bottom-bar />
