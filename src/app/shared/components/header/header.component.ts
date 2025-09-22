@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   standalone: true,
@@ -23,20 +24,33 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         <div class="flex items-center gap-4 font-bold text-normal text-text ">
           <div class="hidden md:flex items-center w-[50dvw] justify-around gap-4">
             <a routerLink="/comics" routerLinkActive="underline" class="hover:underline">New Releases</a>
+            @if (this.auth.isAuthenticated()) {
             <a routerLink="/bookmarks" routerLinkActive="underline" class="hover:underline">Bookmarks</a>
             <a routerLink="/settings" routerLinkActive="underline" class="hover:underline">Settings</a>
+            }
           </div>
 
           <!-- Login (always visible) -->
+          @if (!this.auth.isAuthenticated()) {
           <a
             routerLink="/auth/login"
             class="rounded-4xl px-4 py-2 border border-[--color-text]
                    text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
                    transition-colors shadow-md shadow-[--color-shadow]/40 rounded-4xl"
           >Login</a>
+          } @else {
+          <button
+            (click)="auth.logout()"
+            class="rounded-4xl px-4 py-2 border border-[--color-text]
+                   text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
+                   transition-colors shadow-md shadow-[--color-shadow]/40 rounded-4xl"
+          >Logout</button>
+          }
         </div>
       </div>
     </nav>
   `
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  constructor(public auth: AuthService) {}
+}

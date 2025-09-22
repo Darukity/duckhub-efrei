@@ -1,57 +1,43 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { User } from '../models/user.model';
 
-interface MockUser extends User {
+interface StoredUser extends User {
   password: string;
 }
 
+const USERS_KEY = 'auth_users';
+const CURRENT_KEY = 'auth_user';
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private _user = signal<User | null>(this.restore());
+  private _user = signal<User | null>(this.restoreCurrent());
   user = computed(() => this._user());
 
-  // Fake DB of users (could also be persisted in localStorage)
-  private mockUsers: MockUser[] = [
-    {
-      id: '1',
-      username: 'admin',
-      email: 'admin@duckhub.dev',
-      roles: ['admin'],
-      password: 'admin123',
-      token: 'mock-token-admin',
-    },
-    {
-      id: '2',
-      username: 'ducklover',
-      email: 'duck@duckhub.dev',
-      roles: ['user'],
-      password: 'quackquack',
-      token: 'mock-token-duck',
-    },
-  ];
+  constructor() {
+    // seed initial users if none
+    if (this.loadUsers().length === 0) {
+      this.saveUsers([
+        { id: '1', username: 'admin', email: 'admin@duckhub.dev', roles: ['admin'], password: 'admin123', token: 'mock-token-admin' },
+        { id: '2', username: 'ducklover', email: 'duck@duckhub.dev', roles: ['user'], password: 'quackquack', token: 'mock-token-duck' }
+      ]);
+    }
+  }
 
   login(username: string, password: string): boolean {
-    const found = this.mockUsers.find((u) => u.username === username && u.password === password);
+    const found = this.loadUsers().find(u => u.username === username && u.password === password);
     if (!found) return false;
 
-    const user: User = {
-      id: found.id,
-      username: found.username,
-      email: found.email,
-      roles: found.roles,
-      token: found.token,
-    };
-
+    const { password: _pw, ...user } = found; // exclude password
     this._user.set(user);
-    localStorage.setItem('auth_user', JSON.stringify(user));
+    localStorage.setItem(CURRENT_KEY, JSON.stringify(user));
     return true;
   }
 
   register(username: string, email: string, password: string): boolean {
-    if (this.mockUsers.some((u) => u.username === username)) {
-      return false; // already exists
-    }
-    const newUser: MockUser = {
+    const users = this.loadUsers();
+    if (users.some(u => u.username === username)) return false;
+
+    const newUser: StoredUser = {
       id: crypto.randomUUID(),
       username,
       email,
@@ -59,13 +45,17 @@ export class AuthService {
       password,
       token: 'mock-token-' + username,
     };
-    this.mockUsers.push(newUser);
+
+    users.push(newUser);
+    this.saveUsers(users);
+
+    // auto-login
     return this.login(username, password);
   }
 
   logout() {
     this._user.set(null);
-    localStorage.removeItem('auth_user');
+    localStorage.removeItem(CURRENT_KEY);
   }
 
   isAuthenticated(): boolean {
@@ -76,8 +66,18 @@ export class AuthService {
     return this._user()?.roles.includes('admin') ?? false;
   }
 
-  private restore(): User | null {
-    const raw = localStorage.getItem('auth_user');
+  // --- private helpers ---
+  private loadUsers(): StoredUser[] {
+    const raw = localStorage.getItem(USERS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  private saveUsers(users: StoredUser[]): void {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+
+  private restoreCurrent(): User | null {
+    const raw = localStorage.getItem(CURRENT_KEY);
     return raw ? JSON.parse(raw) : null;
   }
 }
