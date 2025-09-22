@@ -1,0 +1,174 @@
+@font-face {
+    font-family: Aller;
+    src: url("../fonts/Aller_Std_Rg.ttf");
+}
+
+:root {
+    --main-color: #242424;
+    --primary-color: #184d05;
+    --primary-color-light: #7ca503;
+    --secondary-color: #494949;
+    --validating-color: #00ff00;
+    --error-color: #ff0000;
+    
+    --text-color: #dfdfdf;
+    --text-color-light: #ffffff;
+    --shadow-color: #000000;
+    --inset-color: #0000005d;
+
+    --rounded: 25px;
+    --rounded-small: 10px;
+    --rounded-medium: 20px;
+    --font-size-small: 10px;
+    --font-size-medium: 20px;
+    --font-size-large: 30px;
+    --font-size-xlarge: 50px;
+}
+
+* {
+    margin: 0%;
+    padding: 0%;
+    font-family: Aller;
+    font-optical-sizing: auto;
+    font-style: normal;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-decoration-style: none;
+    transition: all 0.5s;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+}
+
+/* nav */
+
+#topBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom-right-radius: var(--rounded);
+    border-bottom-left-radius: var(--rounded);
+    box-shadow: var(--shadow-color) 0px 0px 10px 0px,
+    inset var(--inset-color) 0px 0px 10px 0px;
+}
+
+#topBar #menu {
+    display: flex;
+    width: 50%;
+    margin-right: 2%;
+    justify-content: space-between;
+}
+
+#topBar #menu a {
+    color: var(--text-color);
+    padding: 10px;
+    font-weight: bolder;
+}
+
+#topBar #home {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color);
+    padding: 10px;
+    font-weight: bolder;
+    font-size: var(--font-size-large);
+    width: 15rem;
+    margin-left: 2%;
+}
+
+#bottomBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: none;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--main-color);
+    border-top-right-radius: var(--rounded);
+    border-top-left-radius: var(--rounded);
+    box-shadow: var(--shadow-color) 0px 0px 10px 0px,
+    inset var(--inset-color) 0px 0px 10px 0px;
+}
+
+#bottomBar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    font-size: var(--font-size-medium);
+    padding: 10px;
+    font-weight: bolder;
+}
+
+#bottomBar img {
+    width: 5rem;
+    height: auto;
+}
+
+/* main */
+
+h1 {
+    font-size: var(--font-size-xlarge);
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 2%;
+}
+
+/* pages */
+
+#pages {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: max-content;
+}
+
+#pages .block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: var(--font-size-medium);
+    padding: 10px;
+    font-weight: bolder;
+    border: 2px solid var(--text-color);
+    border-radius: calc(var(--rounded) - 10px);
+    width: 5rem;
+    cursor: auto;
+}
+
+#pages .current {
+    background-color: var(--text-color);
+    color: var(--main-color);
+}
+
+#pages .number:hover {
+    background-color: var(--text-color);
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+#pages .number:hover > img {
+    filter: invert(1);
+}
+
+#pages img {
+    width: 2rem;
+    height: auto;
+}

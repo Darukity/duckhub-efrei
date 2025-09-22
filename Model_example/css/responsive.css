@@ -1,0 +1,335 @@
+/* media queries */
+
+@media screen and (max-width: 1450px) and (min-width: 1067px) {
+    #comic_details img {
+        width: 20rem;
+    }
+    #comic_header #chapter {
+        font-size: var(--font-size-small);
+    }
+    
+    #description p {
+        font-size: var(--font-size-small);
+    }
+    
+    #comic_details p {
+        font-size: var(--font-size-small);
+        margin-top: 0;
+    }
+    
+    #comic_details h2 {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_details h3 {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_gallery img {
+        width: 10rem;
+    }
+}
+
+@media screen and (max-width: 1066px) and (min-width: 617px) {
+    #comics img {
+        width: 15rem;
+    }
+    #comic_details img {
+        width: 30rem;
+    }
+    #comic_header #chapter {
+        font-size: var(--font-size-small);
+    }
+    
+    #description p {
+        font-size: var(--font-size-small);
+    }
+    
+    #comic_details p {
+        font-size: var(--font-size-small);
+        margin-top: 0;
+    }
+    
+    #comic_details h2 {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_details h3 {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+
+    #comic_gallery img {
+        width: 7rem;
+    }
+}
+
+@media screen and (max-width: 616px) and (min-width: 534px) {
+    :root {
+        --rounded: 20px;
+        --rounded-small: 10px;
+        --rounded-medium: 15px;
+        --font-size-small: 5px;
+        --font-size-medium: 15px;
+        --font-size-large: 25px;
+        --font-size-xlarge: 40px;
+    }
+
+    #bottomBar {
+        display: flex;
+    }
+
+    #bottomBar img {
+        width: 4rem;
+        height: auto;
+    }
+
+    #topBar #home {
+        width: 14rem;
+    }
+
+    #topBar #menu {
+        display: none;
+    }
+
+    .comic img {
+        width: 15rem;
+    }
+
+    #pages {
+        gap: 5px;
+        margin-bottom: 150px;
+    }
+    
+    #pages a {
+        border-radius: var(--rounded);
+        width: 2.5rem;
+    }
+
+    #comic_header {
+        flex-direction: column;
+        width: 100%;
+
+    }
+
+    #comic_details img {
+        width: 10rem;
+    }
+
+    #comic_header #chapter {
+        font-size: var(--font-size-large);
+    }
+    
+    #description {
+        margin-top: 10px;
+        font-size: var(--font-size-medium);
+    }
+    
+    #comic_details p {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_details h2 {
+        font-size: var(--font-size-xlarge);
+        margin-top: 0;
+    }
+    
+    #comic_details h3 {
+        font-size: var(--font-size-large);
+        margin-top: 0;
+    }
+
+    #play_button {
+        bottom: 140px;
+        right: 15px;
+    } 
+
+    #comic_gallery img {
+        width: 5rem;
+    }
+}
+
+@media screen and (max-width: 533px) and (min-width: 371px) {
+    :root {
+        --rounded: 15px;
+        --rounded-small: 10px;
+        --rounded-medium: 15px;
+        --font-size-small: 5px;
+        --font-size-medium: 10px;
+        --font-size-large: 25px;
+        --font-size-xlarge: 30px;
+    }
+
+    #topBar #home {
+        width: 14rem;
+    }
+
+    #comics img {
+        width: 10rem;
+    }
+
+    #topBar #menu {
+        display: none;
+    }
+
+    #bottomBar {
+        display: flex;
+    }
+
+    #bottomBar img {
+        width: 2rem;
+        height: auto;
+    }
+
+    #pages {
+        gap: 2px;
+        margin-bottom: 150px;
+    }
+    
+    #pages a {
+        border-radius: var(--rounded);
+        width: 2rem;
+    }
+
+    #pages img {
+        width: 1rem;
+        height: auto;
+    }
+
+    #comic_header {
+        flex-direction: column;
+        width: 100%;
+
+    }
+
+    #comic_details img {
+        width: 10rem;
+    }
+
+    #comic_header #chapter {
+        font-size: var(--font-size-large);
+    }
+    
+    #description {
+        margin-top: 10px;
+        font-size: var(--font-size-medium);
+    }
+    
+    #comic_details p {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_details h2 {
+        font-size: var(--font-size-xlarge);
+        margin-top: 0;
+    }
+    
+    #comic_details h3 {
+        font-size: var(--font-size-large);
+        margin-top: 0;
+    }
+
+    #comic_gallery img {
+        width: 5rem;
+    }
+
+    #play_button {
+        bottom: 100px;
+        right: 15px;
+    } 
+}
+
+@media screen and (max-width: 370px) {
+    :root {
+        --rounded: 10px;
+        --rounded-small: 5px;
+        --rounded-medium: 10px;
+        --font-size-small: 5px;
+        --font-size-medium: 10px;
+        --font-size-large: 20px;
+        --font-size-xlarge: 25px;
+    }
+
+    #topBar #home {
+        width: 14rem;
+    }
+
+    #comics img {
+        width: 7rem;
+    }
+
+    #topBar #menu {
+        display: none;
+    }
+
+    #bottomBar {
+        display: flex;
+    }
+
+    #bottomBar img {
+        width: 2rem;
+        height: auto;
+    }
+
+    #pages {
+        gap: 2px;
+        margin-bottom: 150px;
+    }
+    
+    #pages a {
+        border-radius: var(--rounded);
+        width: 2rem;
+    }
+
+    #pages img {
+        width: 1rem;
+        height: auto;
+    }
+
+    #comic_header {
+        flex-direction: column;
+        width: 100%;
+
+    }
+
+    #comic_details img {
+        width: 10rem;
+    }
+    #comic_header #chapter {
+        font-size: var(--font-size-large);
+    }
+    
+    #description {
+        margin-top: 10px;
+        font-size: var(--font-size-medium);
+    }
+    
+    #comic_details p {
+        font-size: var(--font-size-medium);
+        margin-top: 0;
+    }
+    
+    #comic_details h2 {
+        font-size: var(--font-size-xlarge);
+        margin-top: 0;
+    }
+    
+    #comic_details h3 {
+        font-size: var(--font-size-large);
+        margin-top: 0;
+    }
+
+    #play_button {
+        bottom: 100px;
+        right: 15px;
+    }
+
+    #comic_gallery img {
+        width: 5rem;
+    }
+}
