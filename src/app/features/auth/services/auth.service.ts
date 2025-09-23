@@ -1,3 +1,4 @@
+// src/app/features/auth/services/auth.service.ts
 import { Injectable, signal, computed } from '@angular/core';
 import { User } from '../models/user.model';
 
@@ -14,17 +15,33 @@ export class AuthService {
   user = computed(() => this._user());
 
   constructor() {
-    // seed initial users if none
+    // seed initial users if none exist
     if (this.loadUsers().length === 0) {
       this.saveUsers([
-        { id: '1', username: 'admin', email: 'admin@duckhub.dev', roles: ['admin'], password: 'admin123', token: 'mock-token-admin' },
-        { id: '2', username: 'ducklover', email: 'duck@duckhub.dev', roles: ['user'], password: 'quackquack', token: 'mock-token-duck' }
+        {
+          id: '1',
+          username: 'admin',
+          email: 'admin@duckhub.dev',
+          roles: ['admin'],
+          password: 'admin123',
+          token: 'mock-token-admin',
+        },
+        {
+          id: '2',
+          username: 'ducklover',
+          email: 'duck@duckhub.dev',
+          roles: ['user'],
+          password: 'quackquack',
+          token: 'mock-token-duck',
+        },
       ]);
     }
   }
 
   login(username: string, password: string): boolean {
-    const found = this.loadUsers().find(u => u.username === username && u.password === password);
+    const found = this.loadUsers().find(
+      (u) => u.username === username && u.password === password
+    );
     if (!found) return false;
 
     const { password: _pw, ...user } = found; // exclude password
@@ -35,7 +52,7 @@ export class AuthService {
 
   register(username: string, email: string, password: string): boolean {
     const users = this.loadUsers();
-    if (users.some(u => u.username === username)) return false;
+    if (users.some((u) => u.username === username)) return false;
 
     const newUser: StoredUser = {
       id: crypto.randomUUID(),
@@ -53,7 +70,7 @@ export class AuthService {
     return this.login(username, password);
   }
 
-  logout() {
+  logout(): void {
     this._user.set(null);
     localStorage.removeItem(CURRENT_KEY);
   }
@@ -64,6 +81,15 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this._user()?.roles.includes('admin') ?? false;
+  }
+
+  /** --- helpers exposés aux guards/interceptor --- */
+  getCurrentUser(): User | null {
+    return this._user();
+  }
+
+  getToken(): string | null {
+    return this._user()?.token ?? null;
   }
 
   // --- private helpers ---

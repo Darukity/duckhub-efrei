@@ -1,14 +1,20 @@
-// src/app/core/guards/admin.guard.ts
+// src/app/core/guards/auth.guard.ts
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../features/auth/services/auth.service';
 
-export const adminGuard: CanActivateFn = () => {
-  const auth = inject(AuthService);
+export const authGuard: CanActivateFn = (_route, state) => {
+  const authService = inject(AuthService);
   const router = inject(Router);
-  if (!auth.isAuthenticated() || !auth.isAdmin()) {
-    router.navigate(['/']);
-    return false;
+
+  const user = authService.getCurrentUser();
+
+  if (user) {
+    return true;
   }
-  return true;
+
+  // Redirige vers login en gardant l’URL demandée
+  return router.createUrlTree(['/auth/login'], {
+    queryParams: { returnUrl: state.url }
+  });
 };
