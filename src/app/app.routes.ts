@@ -9,5 +9,6 @@ export const routes: Routes = [
   { path: 'reader', canActivate: [authGuard], loadChildren: () => import('./features/reader/reader.routes').then(m => m.readerRoutes) },
   { path: 'settings', canActivate: [authGuard], loadChildren: () => import('./features/settings/settings.routes').then(m => m.settingsRoutes) },
   { path: 'bookmarks', canActivate: [authGuard], loadChildren: () => import('./features/bookmarks/bookmarks.routes').then(m => m.bookmarksRoutes) },
+  { path: 'admin', canActivate: [authGuard], loadChildren: () => import('./features/admin/admin.routes').then(m => m.adminRoutes) },
   { path: '**', redirectTo: '' }
 ];
