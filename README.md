@@ -1,59 +1,66 @@
-# Duckhub
+# DuckHub
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+DuckHub is a demo comics reader built with Angular 20, Tailwind v4, and PWA support.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+* Angular 20 (standalone, control flow @if/@for)
+* Tailwind CSS v4 (CSS-first `@theme`)
+* Signals for state management (Auth, Settings, Bookmarks, Comics)
+* PWA (Service Worker, `ngsw`)
+* LocalStorage for mocks (auth, bookmarks, admin overlay)
+
+## Features
+
+* Auth (login/register) with guards + HTTP interceptor (mock tokens)
+* Comics list & detail (chapters, pages gallery)
+* Reader with 3 modes:
+
+  * Vertical (webtoon): stacked pages, Prev/Next → chapter ±
+  * LTR / RTL: single page stage, Prev/Next & arrows → page ±
+* Bookmarks per comic (chapter + page), resume from bookmarks page
+* Admin dashboard (CRUD) using localStorage override
+* Settings (reading mode) persisted in LocalStorage
+* PWA-ready
+
+## Setup
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tailwind v4
 
-## Code scaffolding
+* `@tailwindcss/postcss` plugin via `.postcssrc.json`
+* `src/styles.css`:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+  ```css
+  @import "tailwindcss";
+  @theme { /* custom CSS variables */ }
+  ```
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Scripts
 
 ```bash
-ng build
+npm run start        # dev
+npm run build        # production build
+npm run lint         # ESLint
+npm run test         # unit tests (Karma/Jasmine)
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## PWA
 
 ```bash
-ng test
+ng build --configuration production
+npx http-server -p 4200 dist/duckhub/
 ```
 
-## Running end-to-end tests
+## Test accounts
 
-For end-to-end (e2e) testing, run:
+* admin / admin123
+* ducklover / quackquack
 
-```bash
-ng e2e
-```
+## Commits
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Conventional Commits (feat, fix, chore, refactor, test, docs, build, ci).
