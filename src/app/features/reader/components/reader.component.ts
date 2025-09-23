@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ComicsService, Comic } from '../../comics/services/comics.service';
 import { SettingsService, ReadingMode } from '../../settings/services/settings.service';
 
+import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
+
 @Component({
   standalone: true,
   selector: 'app-reader',
@@ -19,7 +21,7 @@ import { SettingsService, ReadingMode } from '../../settings/services/settings.s
 
         <div class="flex items-center gap-2">
             <label class="text-sm">Chapter</label>
-            <select class="border rounded px-3 py-1"
+            <select class="border rounded px-3 py-1 cursor-pointer"
                     [ngModel]="selectedChapterId()" (ngModelChange)="onChapterChange($event)">
             @for (ch of comic.chapters; track ch.id) {
                 <option [value]="ch.id">#{{ ch.number }} — {{ ch.title }}</option>
@@ -28,8 +30,9 @@ import { SettingsService, ReadingMode } from '../../settings/services/settings.s
         </div>
 
         <div class="ml-auto flex items-center gap-2">
-            <button class="px-3 py-1 border rounded" (click)="onPrev()" [disabled]="!canGoPrev()">Prev</button>
-            <button class="px-3 py-1 border rounded" (click)="onNext()" [disabled]="!canGoNext()">Next</button>
+            <button class="px-3 py-1 border rounded cursor-pointer" (click)="addBookmark()">Bookmark</button>
+            <button class="px-3 py-1 border rounded cursor-pointer" (click)="onPrev()" [disabled]="!canGoPrev()">Prev</button>
+            <button class="px-3 py-1 border rounded cursor-pointer" (click)="onNext()" [disabled]="!canGoNext()">Next</button>
 
             <!-- Input page (visible que en LTR/RTL) -->
             @if (mode() !== 'vertical') {
@@ -44,13 +47,13 @@ import { SettingsService, ReadingMode } from '../../settings/services/settings.s
             }
 
             <div class="flex items-center gap-1">
-            <button class="px-2 py-1 border rounded text-xs"
+            <button class="px-2 py-1 border rounded text-xs cursor-pointer"
                     [class.bg-black]="mode() === 'vertical'" [class.text-white]="mode() === 'vertical'"
                     (click)="setMode('vertical')">Vertical</button>
-            <button class="px-2 py-1 border rounded text-xs"
+            <button class="px-2 py-1 border rounded text-xs cursor-pointer"
                     [class.bg-black]="mode() === 'ltr'" [class.text-white]="mode() === 'ltr'"
                     (click)="setMode('ltr')">LTR</button>
-            <button class="px-2 py-1 border rounded text-xs"
+            <button class="px-2 py-1 border rounded text-xs cursor-pointer"
                     [class.bg-black]="mode() === 'rtl'" [class.text-white]="mode() === 'rtl'"
                     (click)="setMode('rtl')">RTL</button>
             </div>
@@ -110,14 +113,42 @@ export class ReaderComponent implements OnInit, AfterViewInit {
   @ViewChildren('pageEl') pageEls!: QueryList<ElementRef<HTMLImageElement>>;
 
   jumpToPage(pageNum: number) {
-  const total = this.pages().length;
-  if (total === 0) return;
-  let target = Math.max(1, Math.min(total, Math.floor(pageNum)));
-  this.currentPage.set(target - 1);
+    const total = this.pages().length;
+    if (total === 0) return;
+    let target = Math.max(1, Math.min(total, Math.floor(pageNum)));
+    this.currentPage.set(target - 1);
+  }
+
+  private bm = inject(BookmarksService);
+  addBookmark() {
+    if (!this.comic) return;
+    const chapterId = this.selectedChapterId();
+    const pageIndex = this.mode() === 'vertical' ? 0 : this.currentPage();
+    this.bm.set(this.comic.id, chapterId, pageIndex);
+  }
+
+private applyPageFromQuery(): void {
+
+  if (this.mode() === 'vertical') return;
+  if (this.pages().length === 0) return;
+
+  const pageParam = this.route.snapshot.queryParamMap.get('page');
+  if (pageParam == null) return;
+
+  const n = Math.floor(Number(pageParam));
+  if (!Number.isFinite(n)) return;
+
+  const idx = Math.max(0, Math.min(this.pages().length - 1, n));
+  this.currentPage.set(idx);
 }
 
 
-  ngOnInit(): void {
+
+ngOnInit(): void {
+    this.route.queryParamMap.subscribe(() => {
+        this.applyPageFromQuery();
+    });
+
     if (this.comics.comics().length === 0) this.comics.load();
 
     this.route.paramMap.subscribe(params => {
@@ -182,6 +213,9 @@ export class ReaderComponent implements OnInit, AfterViewInit {
     const ch = this.comic.chapters.find(x => x.id === this.selectedChapterId());
     this.pages.set(ch?.pages ?? []);
     this.currentPage.set(0);
+
+    // Apply ?page=N if present (LTR/RTL only)
+    this.applyPageFromQuery();
   }
 
   // ---- Prev/Next semantics per mode ----
