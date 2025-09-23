@@ -1,5 +1,3 @@
-export type ReadingMode = 'ltr' | 'rtl' | 'vertical';
-
 export interface Chapter {
   id: string;
   comicId: string;
@@ -19,18 +17,4 @@ export interface Comic {
   createdAt: string;
   updatedAt: string;
   chapters: Chapter[];
-}
-
-// src/app/features/auth/models/user.model.ts
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-  roles: ('user' | 'admin')[];
-  token?: string;
-}
-
-// src/app/features/settings/models/user-settings.model.ts
-export interface UserSettings {
-  readingMode: ReadingMode;
 }
