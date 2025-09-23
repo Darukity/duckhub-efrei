@@ -73,6 +73,7 @@ export class AuthService {
   logout(): void {
     this._user.set(null);
     localStorage.removeItem(CURRENT_KEY);
+    window.location.href = '/';
   }
 
   isAuthenticated(): boolean {
