@@ -26,3 +26,73 @@ body {
     background-color: var(--color-main);
     color: var(--color-text);
 }
+
+#play_button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: 0;
+  transition-property: all;
+  transition-duration: 500ms;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  box-shadow: var(--color-shadow) 0px 0px 10px 0px,
+              inset var(--color-inset) 0px 0px 10px 0px;
+}
+
+#play_button img {
+  width: 3rem;
+  height: auto;
+  transition: width 0.5s;
+}
+
+#play_button p {
+  filter: opacity(0);
+  width: 0%;
+  font-size: var(--text-medium);
+  font-weight: bold;
+  color: var(--color-text);
+  margin-left: 5px;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+#play_button:hover {
+  width: 10rem;
+  color: var(--color-main);
+}
+
+#play_button:hover > img {
+  width: 2rem;
+}
+
+#play_button:hover > p {
+  transition-delay: 0.5s;
+  width: 40%;
+  filter: opacity(1);
+}
+
+@media screen and (max-width: 767px) {
+  #play_button {
+    bottom: 7rem;
+    width: 10rem;
+    color: var(--color-main);
+  }
+
+  #play_button > img {
+    width: 2rem;
+  }
+
+  #play_button p {
+    width: 40%;
+    filter: opacity(1);
+  }
+}

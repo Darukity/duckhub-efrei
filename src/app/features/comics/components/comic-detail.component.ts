@@ -57,6 +57,13 @@ import { ComicsService, Comic } from '../services/comics.service';
     } @else {
       <p>Loading…</p>
     }
+    <button
+        id="play_button"
+        [routerLink]="['/reader', comic!.slug, selectedChapterId]"
+        >
+        <img src="/assets/play_arrow_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="play" />
+        <p>Read</p>
+    </button>
   `
 })
 export class ComicDetailComponent implements OnInit {
