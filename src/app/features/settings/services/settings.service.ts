@@ -1,33 +1,30 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect, computed } from '@angular/core';
 
 export type ReadingMode = 'vertical' | 'ltr' | 'rtl';
+export interface Settings { readingMode: ReadingMode; }
 
-export interface Settings {
-  readingMode: ReadingMode;
-}
-
-const SETTINGS_KEY = 'duckhub_settings';
+const KEY = 'duckhub_settings';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
   private _settings = signal<Settings>(this.restore());
+  // dérivés disponibles partout
   settings = this._settings.asReadonly();
+  mode = computed(() => this._settings().readingMode);
+
+  constructor() {
+    // persiste TOUT changement une seule fois, centralisé
+    effect(() => {
+      localStorage.setItem(KEY, JSON.stringify(this._settings()));
+    });
+  }
 
   setReadingMode(mode: ReadingMode) {
-    const newSettings: Settings = { ...this._settings(), readingMode: mode };
-    this._settings.set(newSettings);
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
+    this._settings.update(s => ({ ...s, readingMode: mode }));
   }
 
   private restore(): Settings {
-    const raw = localStorage.getItem(SETTINGS_KEY);
-    if (raw) {
-      try {
-        return JSON.parse(raw) as Settings;
-      } catch {
-        return { readingMode: 'vertical' };
-      }
-    }
-    return { readingMode: 'vertical' };
+    try { return JSON.parse(localStorage.getItem(KEY) ?? ''); }
+    catch { return { readingMode: 'vertical' }; }
   }
 }
