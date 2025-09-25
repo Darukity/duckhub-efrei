@@ -34,7 +34,9 @@ export class AuthService {
   login(username: string, password: string): boolean {
     const found = this.loadUsers().find(u => u.username === username && u.password === password);
     if (!found) return false;
-    const { password: _pw, ...user } = found;
+
+    // exclude password without creating an unused binding
+    const user = (({ password: _omit, ...u }: StoredUser) => u)(found);
     this._user.set(user);
     return true;
   }
@@ -49,7 +51,6 @@ export class AuthService {
 
   logout(): void { this._user.set(null); }
 
-  // pour guards/interceptor si tu veux garder l’API
   getCurrentUser() { return this._user(); }
   getToken() { return this.token(); }
 

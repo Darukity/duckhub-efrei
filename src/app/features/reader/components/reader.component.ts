@@ -18,8 +18,8 @@ import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
         <a class="underline text-sm" [routerLink]="['/comics', comic.slug]">← Back to details</a>
 
         <div class="flex items-center gap-2">
-          <label class="text-sm">Chapter</label>
-          <select class="border rounded px-3 py-1 cursor-pointer"
+          <label class="text-sm" for="reader-chapter-select">Chapter</label>
+          <select id="reader-chapter-select" class="border rounded px-3 py-1 cursor-pointer"
                   [ngModel]="selectedChapterId()" (ngModelChange)="onChapterChange($event)">
             @for (ch of comic.chapters; track ch.id) {
               <option [value]="ch.id">#{{ ch.number }} — {{ ch.title }}</option>
@@ -34,8 +34,8 @@ import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
 
           @if (!isVertical()) {
             <div class="flex items-center gap-1">
-              <label class="text-sm">Page</label>
-              <input type="number" min="1" [max]="pagesCount()"
+              <label class="text-sm" for="reader-page-input">Page</label>
+              <input id="reader-page-input" type="number" min="1" [max]="pagesCount()"
                      class="w-16 border rounded px-1 py-0.5 text-center"
                      [ngModel]="currentPage()+1"
                      (ngModelChange)="jumpToPage($event)" />
@@ -155,10 +155,6 @@ export class ReaderComponent implements OnInit, AfterViewInit {
       };
       resolve();
     });
-  }
-
-  ngAfterViewInit(): void {
-    // reserved for future zoom/scroll behaviors
   }
 
   // UI actions

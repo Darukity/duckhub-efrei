@@ -24,8 +24,9 @@ import { ComicsService, Comic } from '../services/comics.service';
 
             <!-- Chapter selector -->
             <div class="flex items-center gap-3">
-              <label class="text-sm">Chapter</label>
+              <label class="text-sm" for="chapter-select">Chapter</label>
               <select
+                id="chapter-select"
                 class="border rounded px-3 py-1"
                 [(ngModel)]="selectedChapterId"
                 (ngModelChange)="onChapterChange($event)"
@@ -58,11 +59,11 @@ import { ComicsService, Comic } from '../services/comics.service';
       <p>Loading…</p>
     }
     <button
-        id="play_button"
-        [routerLink]="['/reader', comic!.slug, selectedChapterId]"
-        >
-        <img src="/assets/play_arrow_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="play" />
-        <p>Read</p>
+      id="play_button"
+      [routerLink]="['/reader', comic!.slug, selectedChapterId]"
+    >
+      <img src="/assets/play_arrow_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="play" />
+      <p>Read</p>
     </button>
   `
 })
