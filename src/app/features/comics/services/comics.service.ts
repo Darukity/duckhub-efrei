@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, inject } from '@angular/core'; // + inject
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, of, shareReplay } from 'rxjs';
+import { catchError, map, of, shareReplay, delay } from 'rxjs';
 
 export interface Chapter { id: string; comicId: string; number: number; title: string; pages: string[]; }
 export interface Comic { id: string; slug: string; title: string; description: string; author: string; coverUrl: string; tags: string[]; createdAt: string; updatedAt: string; chapters: Chapter[]; }
@@ -18,6 +18,7 @@ export class ComicsService {
 
   load(): void {
     this.http.get<Comic[]>('/assets/mocks/comics.json').pipe(
+      delay(500), // simuler un peu de latence
       map(list => list ?? []),
       catchError(() => of<Comic[]>([])),
       shareReplay(1)
