@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ComicsService, Comic } from '../services/comics.service';
+import { JoinPipe } from '../../../shared/pipes/join.pipe';
 
 @Component({
   standalone: true,
   selector: 'app-comic-detail',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, JoinPipe],
   template: `
     @if (comic) {
       <div class="flex flex-col gap-8">
@@ -17,9 +18,7 @@ import { ComicsService, Comic } from '../services/comics.service';
             <h1 class="text-3xl font-bold">{{ comic.title }}</h1>
             <p>{{ comic.description }}</p>
             <div class="flex gap-2 flex-wrap">
-              @for (t of comic.tags; track t) {
-                <span class="px-2 py-1 text-xs rounded bg-secondary text-text-light/90">{{ t }}</span>
-              }
+              <p class="text-sm opacity-80">{{ comic.tags | join:' • ' }}</p>
             </div>
 
             <!-- Chapter selector -->

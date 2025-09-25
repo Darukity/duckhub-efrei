@@ -61,7 +61,7 @@ import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
         <!-- WEBTOON: all pages stacked -->
         <div class="flow-vertical">
           @for (p of pages(); track p) {
-            <img [src]="p" loading="lazy" [alt]="comic!.title + ' page'" class="w-full max-w-3xl mx-auto object-contain border" />
+            <img [src]="p" loading="lazy" [alt]="comic!.title + ' page'" class="w-full max-w-3xl mx-auto object-contain" />
           }
         </div>
       } @else {
@@ -84,12 +84,12 @@ import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
     @reference "tailwindcss";
 
     /* Vertical layout */
-    .flow-vertical { @apply max-w-6xl mx-auto flex flex-col gap-6 p-4; }
+    .flow-vertical { @apply max-w-6xl mx-auto flex flex-col p-4; }
 
     /* Single-page stage (LTR/RTL) */
     .stage        { @apply mx-auto flex items-center justify-center p-4; }
     .stage-rtl    { direction: rtl; }
-    .page         { @apply max-h-full max-w-full object-contain border; }
+    .page         { @apply max-h-full max-w-full object-contain ; }
   `]
 
 })
