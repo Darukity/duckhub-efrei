@@ -18,15 +18,36 @@ export class BookmarksService {
   set(comicId: string, chapterId: string, pageIndex: number) {
     const now = new Date().toISOString();
     const idx = this._items().findIndex(b => b.comicId === comicId);
+
     if (idx >= 0) {
-      this._items.mutate(arr => arr[idx] = { comicId, chapterId, pageIndex, updatedAt: now });
+      // remplacer l’entrée à l’index donné
+      this._items.update(arr => {
+        const copy = [...arr];
+        copy[idx] = { comicId, chapterId, pageIndex, updatedAt: now };
+        return copy;
+      });
     } else {
-      this._items.update(arr => [{ comicId, chapterId, pageIndex, updatedAt: now }, ...arr]);
+      // ajouter au début de la liste
+      this._items.update(arr => [
+        { comicId, chapterId, pageIndex, updatedAt: now },
+        ...arr
+      ]);
     }
   }
 
-  get(comicId: string) { return this._items().find(b => b.comicId === comicId); }
-  remove(comicId: string) { this._items.update(arr => arr.filter(b => b.comicId !== comicId)); }
+  get(comicId: string) {
+    return this._items().find(b => b.comicId === comicId);
+  }
 
-  private restore(): Bookmark[] { try { return JSON.parse(localStorage.getItem(KEY) ?? ''); } catch { return []; } }
+  remove(comicId: string) {
+    this._items.update(arr => arr.filter(b => b.comicId !== comicId));
+  }
+
+  private restore(): Bookmark[] {
+    try {
+      return JSON.parse(localStorage.getItem(KEY) ?? '');
+    } catch {
+      return [];
+    }
+  }
 }
