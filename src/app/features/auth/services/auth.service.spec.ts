@@ -21,9 +21,10 @@ describe('AuthService', () => {
   });
 
   it('should seed default users on first run', () => {
-    const users = JSON.parse(localStorage.getItem(USERS_KEY) ?? '[]');
+    interface StoredUser { username: string }
+    const users = JSON.parse(localStorage.getItem(USERS_KEY) ?? '[]') as StoredUser[];
     expect(users.length).toBeGreaterThan(0);
-    expect(users.some((u: any) => u.username === 'admin')).toBeTrue();
+    expect(users.some((u) => u.username === 'admin')).toBeTrue();
   });
 
   it('should login default admin user', () => {

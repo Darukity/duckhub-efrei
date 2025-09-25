@@ -5,6 +5,8 @@ import { ReaderComponent } from './reader.component';
 import { ComicsService, Comic } from '../../comics/services/comics.service';
 import { SettingsService } from '../../settings/services/settings.service';
 
+interface WritableSignalLike<T> { set(v: T): void }
+
 describe('ReaderComponent (integration)', () => {
   let comicsSvc: ComicsService;
   let settings: SettingsService;
@@ -24,17 +26,23 @@ describe('ReaderComponent (integration)', () => {
     comicsSvc = TestBed.inject(ComicsService);
     settings = TestBed.inject(SettingsService);
 
-    // seed comics directly
-    (comicsSvc as any)._comics.set([mock]);
+    // seed comics
+    (comicsSvc as unknown as { _comics: WritableSignalLike<Comic[]> })._comics.set([mock]);
   });
 
   it('vertical mode stacks pages', () => {
     settings.setReadingMode('vertical');
     const fixture = TestBed.createComponent(ReaderComponent);
-    // mock route params
-    (fixture.componentInstance as any).comic = mock;
-    (fixture.componentInstance as any).selectedChapterId.set('c1');
-    (fixture.componentInstance as any).pages.set(mock.chapters[0].pages);
+
+    const inst = fixture.componentInstance as unknown as {
+      comic: Comic | null;
+      selectedChapterId: WritableSignalLike<string>;
+      pages: WritableSignalLike<string[]>;
+    };
+
+    inst.comic = mock;
+    inst.selectedChapterId.set('c1');
+    inst.pages.set(mock.chapters[0].pages);
 
     fixture.detectChanges();
     const imgs = fixture.nativeElement.querySelectorAll('.flow-vertical img');
@@ -44,9 +52,16 @@ describe('ReaderComponent (integration)', () => {
   it('ltr mode shows single page', () => {
     settings.setReadingMode('ltr');
     const fixture = TestBed.createComponent(ReaderComponent);
-    (fixture.componentInstance as any).comic = mock;
-    (fixture.componentInstance as any).selectedChapterId.set('c1');
-    (fixture.componentInstance as any).pages.set(mock.chapters[0].pages);
+
+    const inst = fixture.componentInstance as unknown as {
+      comic: Comic | null;
+      selectedChapterId: WritableSignalLike<string>;
+      pages: WritableSignalLike<string[]>;
+    };
+
+    inst.comic = mock;
+    inst.selectedChapterId.set('c1');
+    inst.pages.set(mock.chapters[0].pages);
 
     fixture.detectChanges();
     const stageImgs = fixture.nativeElement.querySelectorAll('.stage img');

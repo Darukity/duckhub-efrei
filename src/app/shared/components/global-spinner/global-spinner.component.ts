@@ -1,11 +1,10 @@
+// src/app/shared/components/global-spinner/global-spinner.component.ts
 import { Component, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { HttpLoadingService } from '../../../core/services/http-loading.service';
 
 @Component({
   standalone: true,
   selector: 'app-global-spinner',
-  imports: [],
   template: `
     @if (loading.active()) {
       <div class="fixed inset-0 pointer-events-none flex items-start justify-center">

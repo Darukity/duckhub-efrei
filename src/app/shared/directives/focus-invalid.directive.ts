@@ -1,7 +1,7 @@
 import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-  selector: 'form[focusInvalid]',
+  selector: 'form[appFocusInvalid]',
   standalone: true,
 })
 export class FocusInvalidDirective {
