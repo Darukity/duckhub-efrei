@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 
@@ -17,37 +17,29 @@ import { AuthService } from '../../../features/auth/services/auth.service';
       role="navigation" aria-label="Bottom bar"
     >
       <div class="flex items-center justify-around h-full">
-        <a
-          routerLink="/comics"
-          routerLinkActive="opacity-100"
-          class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100"
-        >
+        <a routerLink="/comics" routerLinkActive="opacity-100"
+           class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100">
           <img src="/assets/new_releases_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="w-7 h-7" />
           <span class="text-[--text-medium]">New</span>
         </a>
-        @if (auth.isAuthenticated()) {
-        <a
-          routerLink="/bookmarks"
-          routerLinkActive="opacity-100"
-          class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100"
-        >
-          <img src="/assets/bookmark_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="w-7 h-7" />
-          <span class="text-[--text-medium]">Bookmarks</span>
-        </a>
 
-        <a
-          routerLink="/settings"
-          routerLinkActive="opacity-100"
-          class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100"
-        >
-          <img src="/assets/duck edit2.svg" alt="" class="w-7 h-7" />
-          <span class="text-[--text-medium]">Settings</span>
-        </a>
+        @if (auth.isAuthenticated()) {
+          <a routerLink="/bookmarks" routerLinkActive="opacity-100"
+             class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100">
+            <img src="/assets/bookmark_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="w-7 h-7" />
+            <span class="text-[--text-medium]">Bookmarks</span>
+          </a>
+
+          <a routerLink="/settings" routerLinkActive="opacity-100"
+             class="flex flex-col items-center gap-1 opacity-80 hover:opacity-100">
+            <img src="/assets/duck edit2.svg" alt="" class="w-7 h-7" />
+            <span class="text-[--text-medium]">Settings</span>
+          </a>
         }
       </div>
     </nav>
   `
 })
 export class BottomBarComponent {
-  constructor(public auth: AuthService) {}
+  auth = inject(AuthService);
 }

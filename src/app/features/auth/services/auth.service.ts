@@ -35,8 +35,13 @@ export class AuthService {
     const found = this.loadUsers().find(u => u.username === username && u.password === password);
     if (!found) return false;
 
-    // exclude password without creating an unused binding
-    const user = (({ password: _omit, ...u }: StoredUser) => u)(found);
+    const user: User = {
+      id: found.id,
+      username: found.username,
+      email: found.email,
+      roles: found.roles,
+      token: found.token,
+    };
     this._user.set(user);
     return true;
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 
@@ -14,13 +14,11 @@ import { AuthService } from '../../../features/auth/services/auth.service';
     >
       <div class="mx-auto max-w-[100dvw] px-5 sm:px-8 h-full w-[95dvw]
                   flex items-center justify-between">
-        <!-- Brand -->
         <a routerLink="/" class="flex items-center gap-2 select-none">
           <img src="/assets/logo.svg" alt="DuckHub" class="h-22 w-22" />
           <span class="font-bold text-text text-large">DuckHub</span>
         </a>
 
-        <!-- Menu (hidden on phones except Login/Logout) -->
         <div class="flex items-center gap-4 font-bold text-normal text-text">
           <div class="hidden md:flex items-center w-[50dvw] justify-around gap-4">
             <a routerLink="/comics" routerLinkActive="underline" class="hover:underline">New Releases</a>
@@ -35,21 +33,16 @@ import { AuthService } from '../../../features/auth/services/auth.service';
             }
           </div>
 
-          <!-- Login / Logout (always visible) -->
           @if (!auth.isAuthenticated()) {
-            <a
-              routerLink="/auth/login"
-              class="rounded-4xl px-4 py-2 border border-[--color-text]
-                     text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
-                     transition-colors shadow-md shadow-[--color-shadow]/40"
-            >Login</a>
+            <a routerLink="/auth/login"
+               class="rounded-4xl px-4 py-2 border border-[--color-text]
+                      text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
+                      transition-colors shadow-md shadow-[--color-shadow]/40">Login</a>
           } @else {
-            <button
-              (click)="auth.logout()"
-              class="rounded-4xl px-4 py-2 border border-[--color-text]
-                     text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
-                     transition-colors shadow-md shadow-[--color-shadow]/40"
-            >Logout</button>
+            <button (click)="auth.logout()"
+                    class="rounded-4xl px-4 py-2 border border-[--color-text]
+                           text-[--color-text] hover:bg-[--color-primary-light] hover:text-[--color-main]
+                           transition-colors shadow-md shadow-[--color-shadow]/40">Logout</button>
           }
         </div>
       </div>
@@ -57,5 +50,5 @@ import { AuthService } from '../../../features/auth/services/auth.service';
   `
 })
 export class HeaderComponent {
-  constructor(public auth: AuthService) {}
+  auth = inject(AuthService);
 }

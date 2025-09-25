@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core'; // + inject
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, of, shareReplay } from 'rxjs';
 
@@ -10,12 +10,11 @@ export class ComicsService {
   private _comics = signal<Comic[]>([]);
   comics = this._comics.asReadonly();
 
-  // exemples de dérivés utiles
   titles = computed(() => this._comics().map(c => c.title));
   bySlug = (slug: string) => this._comics().find(c => c.slug === slug) ?? null;
   byId   = (id: string)   => this._comics().find(c => c.id === id) ?? null;
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   load(): void {
     this.http.get<Comic[]>('/assets/mocks/comics.json').pipe(
