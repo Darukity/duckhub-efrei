@@ -44,6 +44,7 @@ import { passwordMatchValidator } from '../../../shared/validators/password-matc
         </form>
     `,
     styles: [`
+        @reference "tailwindcss";
         .input { @apply w-full border rounded px-3 py-2; }
         .btn-primary { @apply bg-black text-white rounded px-4 py-2; }
         .text-error { @apply text-red-600; }

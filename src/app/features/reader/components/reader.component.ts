@@ -1,5 +1,5 @@
 import {
-  Component, HostListener, OnInit, AfterViewInit,
+  Component, HostListener, OnInit,
   computed, inject, signal, effect
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -81,13 +81,19 @@ import { BookmarksService } from '../../bookmarks/services/bookmarks.service';
     }
   `,
   styles: [`
+    @reference "tailwindcss";
+
+    /* Vertical layout */
     .flow-vertical { @apply max-w-6xl mx-auto flex flex-col gap-6 p-4; }
+
+    /* Single-page stage (LTR/RTL) */
     .stage        { @apply mx-auto flex items-center justify-center p-4; }
     .stage-rtl    { direction: rtl; }
     .page         { @apply max-h-full max-w-full object-contain border; }
   `]
+
 })
-export class ReaderComponent implements OnInit, AfterViewInit {
+export class ReaderComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private comics = inject(ComicsService);
