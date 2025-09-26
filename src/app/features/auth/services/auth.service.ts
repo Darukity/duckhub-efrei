@@ -1,6 +1,6 @@
-import { Injectable, signal, computed, effect } from '@angular/core';
+import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import { User } from '../models/user.model';
-
+import { Router } from '@angular/router';
 interface StoredUser extends User { password: string; }
 
 const USERS_KEY = 'auth_users';
@@ -9,6 +9,7 @@ const CURRENT_KEY = 'auth_user';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _user = signal<User | null>(this.restoreCurrent());
+  private router = inject(Router);
 
   // dérivés « live »
   user = this._user.asReadonly();
@@ -54,7 +55,10 @@ export class AuthService {
     return this.login(username, password);
   }
 
-  logout(): void { this._user.set(null); }
+  logout(): void {
+    this._user.set(null);
+    this.router.navigate(['/']);
+  }
 
   getCurrentUser() { return this._user(); }
   getToken() { return this.token(); }
