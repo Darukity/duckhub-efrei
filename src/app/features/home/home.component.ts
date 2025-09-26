@@ -44,32 +44,30 @@ import { EmotePipe } from '../../shared/pipes/emote.pipe';
         </p>
       </div>
     </section>
-
-    <!-- Highlights / Features -->
-    <section class="mt-12 md:mt-16">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-4">
-        <div class="rounded-2xl border p-5">
-          <h3 class="font-semibold text-lg mb-1"
-              [innerHTML]="'For Readers :PosL:' | emote:22:'align-middle'"></h3>
-          <p>Vertical (webtoon), LTR, RTL reading modes. Keyboard navigation and quick page jump.</p>
+    @if (!auth.isAuthenticated()) {
+      <!-- Highlights / Features -->
+      <section class="mt-12 md:mt-16">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-4">
+          <div class="rounded-2xl border p-5">
+            <h3 class="font-semibold text-lg mb-1"
+                [innerHTML]="'For Readers :PosL:' | emote:22:'align-middle'"></h3>
+            <p>Vertical (webtoon), LTR, RTL reading modes. Keyboard navigation and quick page jump.</p>
+          </div>
+          <div class="rounded-2xl border p-5">
+            <h3 class="font-semibold text-lg mb-1"
+                [innerHTML]="'Bookmarks :Coeur:' | emote:22:'align-middle'"></h3>
+            <p>Save your spot per comic & chapter. Resume instantly where you left off.</p>
+          </div>
+          <div class="rounded-2xl border p-5">
+            <h3 class="font-semibold text-lg mb-1"
+                [innerHTML]="'Accessible & Fast :Bruh:' | emote:22:'align-middle':'png':{ Bruh:'gif' }"></h3>
+            <p>Tailwind v4, responsive UI, a11y in forms, and PWA-ready performance.</p>
+          </div>
         </div>
-        <div class="rounded-2xl border p-5">
-          <h3 class="font-semibold text-lg mb-1"
-              [innerHTML]="'Bookmarks :Coeur:' | emote:22:'align-middle'"></h3>
-          <p>Save your spot per comic & chapter. Resume instantly where you left off.</p>
-        </div>
-        <div class="rounded-2xl border p-5">
-          <h3 class="font-semibold text-lg mb-1"
-              [innerHTML]="'Accessible & Fast :Bruh:' | emote:22:'align-middle':'png':{ Bruh:'gif' }"></h3>
-          <p>Tailwind v4, responsive UI, a11y in forms, and PWA-ready performance.</p>
-        </div>
-      </div>
-    </section>
-
+      </section>
+    }
     <!-- Content -->
     <section class="mt-12 md:mt-16 space-y-6 px-4">
-      <h2 class="text-2xl font-bold text-center">Latest Comics</h2>
-
       @if (auth.isAuthenticated()) {
         <app-comic-list></app-comic-list>
       } @else {
