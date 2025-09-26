@@ -96,3 +96,9 @@ body {
     filter: opacity(1);
   }
 }
+
+
+.emote {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
