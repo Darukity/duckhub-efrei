@@ -134,9 +134,7 @@ export class AdminComicFormComponent implements OnInit {
     const v = this.form.value;
     const now = new Date().toISOString();
     const comic: Comic = {
-      id: v.id!,
-      slug: v.slug!,
-      title: v.title!,
+      id: v.id!, slug: v.slug!, title: v.title!,
       description: v.description ?? '',
       author: v.author ?? '',
       coverUrl: v.coverUrl ?? '/assets/cover test.jpg',
@@ -147,6 +145,7 @@ export class AdminComicFormComponent implements OnInit {
     };
 
     this.admin.upsert(this.comics.comics(), comic);
+    this.comics.refreshFromOverrides();              // <- important
     this.router.navigate(['/admin/comics']);
   }
 
@@ -163,6 +162,7 @@ export class AdminComicFormComponent implements OnInit {
       pages: ['/assets/cover test.jpg'],
     };
     this.admin.upsertChapter(base, c.id, ch);
+    this.comics.refreshFromOverrides();
   }
 
   editChapter(ch: Chapter) {
@@ -172,6 +172,7 @@ export class AdminComicFormComponent implements OnInit {
     const pages = pagesRaw.split(',').map(s => s.trim()).filter(Boolean);
     const updated: Chapter = { ...ch, title, number, pages };
     this.admin.upsertChapter(this.comics.comics(), ch.comicId, updated);
+    this.comics.refreshFromOverrides();
   }
 
   removeChapter(chapterId: string) {
@@ -179,5 +180,6 @@ export class AdminComicFormComponent implements OnInit {
     const c = this.admin.getById(base, this.form.value.id!);
     if (!c) return;
     this.admin.removeChapter(base, c.id, chapterId);
+    this.comics.refreshFromOverrides();
   }
 }
