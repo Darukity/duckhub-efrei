@@ -3,12 +3,11 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { passwordMatchValidator } from '../../../shared/validators/password-match.validator';
-import { FocusInvalidDirective } from '../../../shared/directives/focus-invalid.directive';
 
 @Component({
   standalone: true,
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink, FocusInvalidDirective],
+  imports: [ReactiveFormsModule, RouterLink],
   template: `
     <form focusInvalid (ngSubmit)="onSubmit()" [formGroup]="form" class="max-w-sm mx-auto p-6 rounded-xl border mt-12 space-y-4">
       <h1 class="text-2xl font-bold">Create account</h1>

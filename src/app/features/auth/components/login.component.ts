@@ -2,12 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { FocusInvalidDirective } from '../../../shared/directives/focus-invalid.directive';
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, FocusInvalidDirective],
+  imports: [ReactiveFormsModule, RouterLink],
   template: `
     <form focusInvalid (ngSubmit)="onSubmit()" [formGroup]="form" class="max-w-sm mx-auto p-6 rounded-xl border mt-12 space-y-4">
       <h1 class="text-2xl font-bold">Sign in</h1>
